@@ -84,6 +84,7 @@ Node *buildTree(string str) {
 
 class Solution {
   public:
+  
   Node* createParentMapping(Node* root,int target, map<Node*,Node*> &nodeToParent){
     Node* res=NULL;
     queue<Node*> q;
@@ -103,8 +104,9 @@ class Solution {
             nodeToParent[front->right]=front;
             q.push(front->right);
         }
-        return res;
+       
     }
+     return res;
   }
   
   int burnTree(Node* root,map<Node*, Node*> &nodeToParent){
@@ -122,26 +124,27 @@ class Solution {
                 if(front->left && !visited[front->left]){
                     flag=1;
                     q.push(front->left);
-                    visited[front->left]=1;
+                    visited[front->left]=true;
                 }
                 if(front->right && !visited[front->right]){
                     flag=1;
                     q.push(front->right);
-                    visited[front->right]=1;
+                    visited[front->right]=true;
                 }
                 if(nodeToParent[front] && !visited[nodeToParent[front]]){
                     flag=1;
                      q.push(nodeToParent[front]);
-                    visited[nodeToParent[front]]=1;
+                    visited[nodeToParent[front]]=true;
                 }
             }
             if(flag==1) ans++;
         }
         return ans;
   }
-  int minTime(Node* root, int target) 
+  
+    int minTime(Node* root, int target) 
     {
-        // int ans =0;
+           // int ans =0;
         map<Node*,Node*> nodeToParent;
         Node* targetNode = createParentMapping(root,target,nodeToParent);
         
